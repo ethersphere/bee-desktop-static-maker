@@ -26,7 +26,24 @@ jobs:
               with:
                   bee-url: https://api.gateway.ethswarm.org
                   postage-batch-id: '0000000000000000000000000000000000000000000000000000000000000000'
-                  dir: 'static'
+                  dir: 'out'
                   index-document: 'static.zip'
             - shell: bash
               run: 'echo "Swarm Hash: ${{ steps.upload.outputs.reference }}"'
+            - id: version
+              run: npm run version
+            - name: release
+              uses: actions/create-release@v1
+              id: release
+              with:
+                  draft: false
+                  prerelease: false
+                  release_name: ${{ steps.version.outputs.version }}
+                  tag_name: ${{ github.ref }}
+            - name: upload linux artifact
+              uses: actions/upload-release-asset@v1
+              with:
+                  upload_url: ${{ steps.release.outputs.upload_url }}
+                  asset_path: out/static.zip
+                  asset_name: static.zip
+                  asset_content_type: application/zip

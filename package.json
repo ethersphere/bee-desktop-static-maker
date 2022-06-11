@@ -6,7 +6,8 @@
     "main": "index.js",
     "scripts": {
         "build": "node --experimental-modules --es-module-specifier-resolution=node index.js",
-        "wrap": "node --experimental-modules --es-module-specifier-resolution=node wrap.js"
+        "wrap": "node --experimental-modules --es-module-specifier-resolution=node wrap.js",
+        "version": "node --experimental-modules --es-module-specifier-resolution=node version.js"
     },
     "keywords": [],
     "author": "",
