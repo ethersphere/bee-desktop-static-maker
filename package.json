@@ -6,13 +6,15 @@
     "main": "index.js",
     "scripts": {
         "build": "node --experimental-modules --es-module-specifier-resolution=node index.js",
-        "wrap": "node --experimental-modules --es-module-specifier-resolution=node wrap.js"
+        "wrap": "node --experimental-modules --es-module-specifier-resolution=node wrap.js",
+        "download": "node --experimental-modules --es-module-specifier-resolution=node download.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "cafe-utility": "^3.0.0",
-        "fs-extra": "^10.1.0"
+        "fs-extra": "^10.1.0",
+        "node-fetch": "^3.2.6"
     }
 }
