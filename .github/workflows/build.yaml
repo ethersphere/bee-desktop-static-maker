@@ -20,3 +20,5 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - run: npm ci
             - run: npm start
+              with:
+                  GIT_CLONE_TOKEN: ${{ secrets.GIT_CLONE_TOKEN }}
