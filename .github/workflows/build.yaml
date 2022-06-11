@@ -29,5 +29,4 @@ jobs:
                   dir: 'static'
                   index-document: 'static.zip'
             - shell: bash
-              run:  echo "Swarm Hash: ${{ steps.upload.outputs.reference }}"
-
+              run: 'echo "Swarm Hash: ${{ steps.upload.outputs.reference }}"'
