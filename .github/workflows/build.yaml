@@ -21,9 +21,13 @@ jobs:
             - run: npm ci
             - run: GIT_CLONE_TOKEN=${{ secrets.GIT_CLONE_TOKEN }} npm run build
             - run: npm run wrap
-            - uses: ethersphere/swarm-actions/upload-dir@v0
+            - id: upload
+              uses: ethersphere/swarm-actions/upload-dir@v0
               with:
                   bee-url: https://api.gateway.ethswarm.org
                   postage-batch-id: '0000000000000000000000000000000000000000000000000000000000000000'
                   dir: 'static'
                   index-document: 'static.zip'
+            - shell: bash
+              run:  echo "Swarm Hash: ${{ steps.upload.outputs.reference }}"
+
