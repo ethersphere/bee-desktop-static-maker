@@ -19,7 +19,9 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - run: npm ci
-            - run: GIT_CLONE_TOKEN=${{ secrets.GIT_CLONE_TOKEN }} npm run build
+            - run: npm run build
+              env:
+                  GIT_CLONE_TOKEN: ${{ secrets.GIT_CLONE_TOKEN }}
             - run: npm run wrap
             - id: upload
               uses: ethersphere/swarm-actions/upload-dir@v0
@@ -40,6 +42,8 @@ jobs:
                   prerelease: false
                   release_name: ${{ steps.version.outputs.version }}
                   tag_name: ${{ github.ref }}
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
             - name: upload linux artifact
               uses: actions/upload-release-asset@v1
               with:
@@ -47,3 +51,5 @@ jobs:
                   asset_path: out/static.zip
                   asset_name: static.zip
                   asset_content_type: application/zip
+              env:
+                  GITHUB_TOKEN: ${{ github.token }}
