@@ -31,15 +31,15 @@ try {
     await cloneRepository('ethersphere/desktop-node-installer', dirname)
     await buildRepository(beeDashboardDir)
     await buildRepository(installerDir)
-    if (await Files.existsAsync('dist')) {
-        await rm('dist', { recursive: true })
+    if (await Files.existsAsync('static')) {
+        await rm('static', { recursive: true })
     }
-    await mkdir('dist/static/installer', { recursive: true })
-    await mkdir('dist/static/dashboard')
-    await copy(join(beeDashboardDir, 'build'), 'dist/static/dashboard')
-    await copy(join(installerDir, 'build'), 'dist/static/installer')
-    await copy('assets', 'dist')
-    await System.execAsync('zip -r static.zip dist/*')
+    await mkdir('static/static/installer', { recursive: true })
+    await mkdir('static/static/dashboard')
+    await copy(join(beeDashboardDir, 'build'), 'static/static/dashboard')
+    await copy(join(installerDir, 'build'), 'static/static/installer')
+    await copy('assets', 'static')
+    await System.execAsync('zip -r static.zip static/*')
 } finally {
     await rm(dirname, { recursive: true })
 }

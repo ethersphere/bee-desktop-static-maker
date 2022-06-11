@@ -1,4 +1,4 @@
 import { copyFile, mkdir } from 'fs/promises'
 
-await mkdir('static')
-await copyFile('static.zip', 'static/static.zip')
+await mkdir('out')
+await copyFile('static.zip', 'out/static.zip')
