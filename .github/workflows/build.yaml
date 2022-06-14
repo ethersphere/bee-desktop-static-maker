@@ -32,19 +32,15 @@ jobs:
                   index-document: 'static.zip'
             - shell: bash
               run: 'echo "Swarm Hash: ${{ steps.upload.outputs.reference }}"'
-            - name: Delete Older Releases
-              uses: dev-drprasad/delete-older-releases@v0.2.0
-              with:
-                  keep_latest: 0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - id: version
+              run: npm run version
             - name: release
               uses: actions/create-release@v1
               id: release
               with:
                   draft: false
                   prerelease: false
-                  release_name: ${{ steps.upload.outputs.reference }}
+                  release_name: ${{ format('{0}-{1}', steps.version.outputs.prefix, steps.upload.outputs.reference) }}
                   tag_name: ${{ steps.upload.outputs.reference }}
               env:
                   GITHUB_TOKEN: ${{ github.token }}

@@ -28,7 +28,7 @@ async function downloadFile(url, target, lockWrapper) {
 
 const latest = await getJson('https://api.github.com/repos/Cafe137/bee-desktop-static-maker/releases/latest')
 
-const swarmHash = latest.name
+const [_, swarmHash] = latest.name.split('-')
 const locked = { value: false }
 const before = Date.now()
 await Promise.any(makeEndpoints(swarmHash).map(x => downloadFile(x, 'static.zip', locked)))

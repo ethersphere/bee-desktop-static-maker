@@ -7,7 +7,8 @@
     "scripts": {
         "build": "node --experimental-modules --es-module-specifier-resolution=node index.js",
         "wrap": "node --experimental-modules --es-module-specifier-resolution=node wrap.js",
-        "download": "node --experimental-modules --es-module-specifier-resolution=node download.js"
+        "download": "node --experimental-modules --es-module-specifier-resolution=node download.js",
+        "version": "node --experimental-modules --es-module-specifier-resolution=node version.js"
     },
     "keywords": [],
     "author": "",
