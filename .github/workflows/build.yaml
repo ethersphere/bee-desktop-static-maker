@@ -21,7 +21,7 @@ jobs:
             - run: npm ci
             - run: npm run build
               env:
-                  GIT_CLONE_TOKEN: ${{ secrets.GIT_CLONE_TOKEN }}
+                  GIT_CLONE_TOKEN: ${{ github.token }}
             - run: npm run wrap
             - id: upload
               uses: ethersphere/swarm-actions/upload-dir@v0
