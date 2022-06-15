@@ -9,14 +9,9 @@ const beeDashboardDir = resolve(join(dirname, 'bee-dashboard'))
 const installerDir = resolve(join(dirname, 'desktop-node-installer'))
 
 async function cloneRepository(name, target, branch = 'master') {
-    await System.execAsync(
-        `git clone https://Cafe137:${process.env.GIT_CLONE_TOKEN}@github.com/${name}.git --depth 1 --branch ${branch}`,
-        false,
-        true,
-        {
-            cwd: resolve(target)
-        }
-    )
+    await System.execAsync(`git clone https://github.com/${name}.git --depth 1 --branch ${branch}`, false, true, {
+        cwd: resolve(target)
+    })
 }
 
 async function buildRepository(directory) {
