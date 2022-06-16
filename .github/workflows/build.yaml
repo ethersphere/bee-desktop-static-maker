@@ -20,6 +20,9 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - run: npm ci
             - run: npm run build
+              env:
+                  BEE_DASHBOARD_SENTRY_KEY: ${{ secrets.BEE_DASHBOARD_SENTRY_KEY }}
+                  BEE_DESKTOP_INSTALLER_SENTRY_KEY: ${{ secrets.BEE_DESKTOP_INSTALLER_SENTRY_KEY }}
             - run: npm run wrap
             - id: upload
               uses: ethersphere/swarm-actions/upload-dir@v0
