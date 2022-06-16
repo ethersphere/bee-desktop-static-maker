@@ -14,17 +14,20 @@ async function cloneRepository(name, target, branch = 'master') {
     })
 }
 
-async function buildRepository(directory) {
-    await System.execAsync('npm i && npm run build', false, true, {
-        cwd: resolve(directory)
+async function buildRepository(directory, sentryKey) {
+    await System.execAsync('npm ci && npm run build', false, true, {
+        cwd: resolve(directory),
+        env: {
+            'REACT_APP_SENTRY_KEY': sentryKey
+        }
     })
 }
 
 await mkdir(dirname)
 await cloneRepository('ethersphere/bee-dashboard', dirname, 'feat/account-tabs')
 await cloneRepository('ethersphere/desktop-node-installer', dirname)
-await buildRepository(beeDashboardDir)
-await buildRepository(installerDir)
+await buildRepository(beeDashboardDir, process.env.BEE_DASHBOARD_SENTRY_KEY)
+await buildRepository(installerDir, process.env.BEE_DESKTOP_INSTALLER_SENTRY_KEY)
 await mkdir('static/static/installer', { recursive: true })
 await mkdir('static/static/dashboard')
 await copy(join(beeDashboardDir, 'build'), 'static/static/dashboard')
