@@ -18,13 +18,13 @@ async function buildRepository(directory, sentryKey) {
     await System.execAsync('npm ci && npm run build', false, true, {
         cwd: resolve(directory),
         env: {
-            'REACT_APP_SENTRY_KEY': sentryKey
+            REACT_APP_SENTRY_KEY: sentryKey
         }
     })
 }
 
 await mkdir(dirname)
-await cloneRepository('ethersphere/bee-dashboard', dirname, 'feat/account-tabs')
+await cloneRepository('ethersphere/bee-dashboard', dirname)
 await cloneRepository('ethersphere/desktop-node-installer', dirname)
 await buildRepository(beeDashboardDir, process.env.BEE_DASHBOARD_SENTRY_KEY)
 await buildRepository(installerDir, process.env.BEE_DESKTOP_INSTALLER_SENTRY_KEY)
