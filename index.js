@@ -18,7 +18,9 @@ async function buildRepository(directory, sentryKey) {
     await System.execAsync('npm ci && npm run build', false, true, {
         cwd: resolve(directory),
         env: {
-            REACT_APP_SENTRY_KEY: sentryKey
+          ...process.env,
+          REACT_APP_SENTRY_KEY: sentryKey,
+          REACT_APP_SENTRY_ENVIRONMENT: 'desktop'
         }
     })
 }
